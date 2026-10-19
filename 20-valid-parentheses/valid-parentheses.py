@@ -7,16 +7,13 @@ class Solution(object):
         mapping = {"}": "{", "]": "[", ")": "("}
         stack = []
 
-        if len(s) % 2 is not 0:
-            return False
-
         for i in s:
-            if i in mapping.values():
+            if i in mapping:
+                if not stack or stack[-1] != mapping[i]:
+                    return False
+                stack.pop()
+            else:
                 stack.append(i)
-            if i in mapping.keys():
-                if len(stack) == 0:
-                    return False
-                curr = stack.pop()
-                if mapping[i] != curr:
-                    return False
-        return True if len(stack) == 0 else False
+        
+        return len(stack) == 0
+        
