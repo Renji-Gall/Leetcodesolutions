@@ -19,10 +19,8 @@ class Solution(object):
         middle = 0
         while l <= r:
             middle = ((l + r) // 2)
-            if matrix[row][middle] == target:
-                return True
-            elif matrix[row][middle] < target:
+            if matrix[row][middle] <= target:
                 l = middle + 1
             else:
                 r = middle - 1
-        return False       
+        return r >= 0 and matrix[row][r] == target       
