@@ -4,14 +4,12 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
-        l, r = 0, 1
-        maxval = 0
-        while r < len(prices):
-            if prices[l] <= prices[r]:
-                maxval = max(maxval, prices[r] - prices[l])
-            
-            while prices[l] > prices[r]:
-                l += 1
-            
-            r += 1
-        return maxval
+        min_price = prices[0]
+        max_profit = 0
+
+        for i in prices:
+            if i < min_price:
+                min_price = i
+            elif i - min_price > max_profit:
+                max_profit = i - min_price
+        return max_profit
